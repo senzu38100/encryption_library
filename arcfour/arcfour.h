@@ -10,8 +10,9 @@
 
 
 struct s_arcfour {
-	// ...
-	int x;
+	int8 i, j, k;
+	int8 s[256];
+
 };
 
 typedef struct s_arcfour Arcfour;
