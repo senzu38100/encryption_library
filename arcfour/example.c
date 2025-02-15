@@ -24,7 +24,7 @@ void printbin(const int8 *input, const int16 size) {
 }
 
 int main() {
-	//Arcfour *rc4;
+	Arcfour *rc4;
 	int16 skey, stext; //size key and text
 	char *key, *from, *encrypted, *decrypted;
 
@@ -39,12 +39,12 @@ int main() {
 	stext = strlen(from);
 
 	printf("Initializing encryption...");
-	//rc4 = rc4init(key, skey);
+	rc4 = rc4init((int8 *)key, skey);
 	printf("done\n");
 
 	printf("'%s'\n ->", from);
 	//encrypted = rc4encrypt(from, stext);
-	printbin((int8 *)key,skey);
+	printbin(rc4->s, skey);
 	
 
 	return 0;
