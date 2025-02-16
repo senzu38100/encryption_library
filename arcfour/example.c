@@ -6,8 +6,7 @@
 
 int main(void);
 
-// ef20 ac12
-
+// Print a byte array in hex format
 void printbin(const int8 *input, const int16 size) {
 	int16 i;
 	const int8 *p;
@@ -29,25 +28,29 @@ int main() {
 	char *key, *from;
 	int8 *encrypted, *decrypted;
 
-	
+	//Simple key and plaintext	
 	key = "tomatoes"; 
 	skey = strlen(key);
 	from = "Shall i compare thee to a summer's day?";
 	stext = strlen(from);
 
+	// Initialize encryption
 	printf("Initializing encryption...");
 	rc4 = rc4init((int8 *)key, skey);
 	printf("done\n");
 
+	// Encrypt text
 	printf("'%s'\n ->", from);
 	encrypted = rc4encrypt(rc4, (int8 *)from, stext);
 	printbin(encrypted, stext);
 	
+	// Reinitialize with the same key to decrypt
 	rc4uninit(rc4);
 	printf("Initializing encryption..."); F;
 	rc4 = rc4init((int8*)key,skey);
 	printf("done\n");
 
+	// Decrypt by reusing the rc4 keystream
 	decrypted = rc4decrypt(rc4,encrypted, stext);
 	printf("    ->'%s'\n", decrypted);
 	rc4uninit(rc4);
